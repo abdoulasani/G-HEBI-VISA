@@ -113,44 +113,88 @@
         </div>
         <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
             <div class="sub-style">
-                <h5 class="sub-title text-primary pe-3">Connectons-nous</h5>
-            </div>
-            <h1 class="display-5 mb-4">Envoyez votre message</h1>
-            <form id="contact-form">
-                <div class="row g-4">
-                    <div class="col-lg-12 col-xl-6">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="name" placeholder="Votre Nom">
-                            <label for="name">Votre Nom</label>
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Contact Form</title>
+                    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+                </head>
+                <body>
+                    <div class="container mt-5">
+                        <div class="sub-style">
+                            <h5 class="sub-title text-primary pe-3">Connectons-nous</h5>
                         </div>
+                        <h1 class="display-5 mb-4">Envoyez votre message</h1>
+                        <form id="contact-form">
+                            <div class="row g-4">
+                                <div class="col-lg-12 col-xl-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" placeholder="Votre Nom" required>
+                                        <label for="name">Votre Nom</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-xl-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="Votre Email" required>
+                                        <label for="email">Votre Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-xl-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="phone" placeholder="Téléphone">
+                                        <label for="phone">Votre Téléphone</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="subject" placeholder="Sujet">
+                                        <label for="subject">Sujet</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Laissez un message ici" id="message" style="height: 160px" required></textarea>
+                                        <label for="message">Message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary w-100 py-3" onclick="sendMessage()">Envoyer le message</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-lg-12 col-xl-6">
-                        <div class="form-floating">
-                            <input type="email" class="form-control" id="email" placeholder="Votre Email">
-                            <label for="email">Votre Email</label>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-xl-6">
-                        <div class="form-floating">
-                            <input type="phone" class="form-control" id="phone" placeholder="Téléphone">
-                            <label for="phone">Votre Téléphone</label>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="subject" placeholder="Sujet">
-                            <label for="subject">Sujet</label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Laissez un message ici" id="message" style="height: 160px"></textarea>
-                            <label for="message">Message</label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="button" class="btn btn-primary w-100 py-3" onclick="sendMessage()">Envoyer le message</button>
+                
+                    <script>
+                        function sendMessage() {
+                            // Collect input values
+                            var name = encodeURIComponent(document.getElementById('name').value.trim());
+                            var email = encodeURIComponent(document.getElementById('email').value.trim());
+                            var phone = encodeURIComponent(document.getElementById('phone').value.trim());
+                            var subject = encodeURIComponent(document.getElementById('subject').value.trim());
+                            var message = encodeURIComponent(document.getElementById('message').value.trim());
+                
+                            // Check if required fields are filled
+                            if (!name || !email || !message) {
+                                alert('Please fill out all required fields.');
+                                return;
+                            }
+                
+                            // Construct the WhatsApp message
+                            var whatsappMessage = `Nom: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ASujet: ${subject}%0AMessage: ${message}`;
+                
+                            // Create the WhatsApp URL
+                            var whatsappURL = `https://api.whatsapp.com/send?phone=22792289128&text=${whatsappMessage}`;
+                
+                            // Open the WhatsApp chat in a new tab
+                            window.open(whatsappURL, '_blank');
+                        }
+                    </script>
+                </body>
+                </html>
+                
+                        
                     </div>
                 </div>
             </form>
